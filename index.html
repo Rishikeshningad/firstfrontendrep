@@ -27,13 +27,40 @@
   localStorage.setItem(Obj.email,JSON.stringify(Obj))
    showNewUserOnScreen(Obj)
    }
+    window.addEventListener("DOMContentLoaded", () => {
+      const localStorageObj = localStorage;
+      const localstoragekeys = Object.keys(localStorageObj)
+
+      for (var i=0; i< localstoragekeys.length; i++){
+        const key = localstoragekeys[i]
+        const userDetailsString = localStorageObj[key];
+        const userDetailsObj = JSON.parse(userDetailsString)
+        showNewUserOnScreen(userDetailsObj)
+      }
+   })
 
    function showNewUserOnScreen(user) {
+     //console.log(localStorage.getItem(user.emailId))
+     if(localStorage.getItem(user.email) !== null){
+       removeUserFromScreen(user.email)
+     }
      const parentNode = document.getElementById('listOfUsers');
      const childHTML = `<li> ${user.name} - ${user.email} </li>`
      parentNode.innerHTML = parentNode.innerHTML + childHTML;  
    }
 
+   function deleteUser(emailId){
+     console.log(emailId)
+     localStorage.removeItem(emailId);
+     removeUserFromScreen(emailId);
+   }
+   function removeUserFromScreen(emailId){
+    const parentNode = document.getElementById('listOfUser')
+       const childNodeToBeDeleted = document.getElementById('listOfUser')
+       if(childNodeToBeDeleted) {
+         parentNode.removeChild(childNodeToBeDeleted)
+       }
+  }
   </script>
 </body>
 </html>
