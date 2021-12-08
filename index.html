@@ -1,97 +1,51 @@
 <html>
     <body>
-        <form  onsubmit="saveToLocalStorage(event)">
-            <label> Name</label>
-            <input id='username' type="text" name="username"  required/>
-            <label> EmailId</label>
-            <input id='email' type="email" name="emailId"  required/>
-            <label> Phone Number</label>
-            <input id='phonenumber' type="tel" name="phonenumber" />
-            <button> Submit </button>
-        </form>
-        <ul id='listOfUsers'></ul>
+       
         <script>
-            function saveToLocalStorage(event) {
-                event.preventDefault();
-                const name = event.target.username.value;
-                const email = event.target.emailId.value;
-                const phonenumber = event.target.phonenumber.value;
-                // localStorage.setItem('name', name);
-                // localStorage.setItem('email', email);
-                // localStorage.setItem('phonenumber', phonenumber)
-                const obj = {
-                    name,
-                    email,
-                    phonenumber
-                }
-                localStorage.setItem(obj.email, JSON.stringify(obj))
-                showNewUserOnScreen(obj)
-            }
+        //  var obj = {num : 2};
+        //  var addToThis = function(a,b,c){
+        //      return this.num+a+b+c;
+        //  };
+        // // console.log(addToThis.call(obj, 1, 2, 3));   //call 
+        // var arr=[1, 2, 3];
+        // console.log(addToThis.apply(obj,arr));          //apply
 
-            window.addEventListener("DOMContentLoaded", () => {
-                const localStorageObj = localStorage;
-                const localstoragekeys  = Object.keys(localStorageObj)
+        // bind
+        // var obj = {num : 2};
+        //  var addToThis = function(a,b,c){
+        //      return this.num+a+b+c;
+        //  };
+        
+        // var arr=[1, 2, 3];
+        // var bound = addToThis.bind(obj);
+        // console.log(bound(1,2,3));
+        
+        
+        // function curring
+        // let multiply = function (x, y){
+        //     console.log(x*y);
+        // }
 
-                for(var i =0; i< localstoragekeys.length; i++){
-                    const key = localstoragekeys[i]
-                    const userDetailsString = localStorageObj[key];
-                    const userDetailsObj = JSON.parse(userDetailsString);
-                    showNewUserOnScreen(userDetailsObj)
-                }
-            })
+        // let multiplyByTwo = multiply.bind(this, 2);
+        // multiplyByTwo(5);
 
-            function showNewUserOnScreen(user){
-                document.getElementById('email').value = '';
-                document.getElementById('username').value = '';
-                document.getElementById('phonenumber').value ='';
-                // console.log(localStorage.getItem(user.emailId))
-                if(localStorage.getItem(user.email) !== null){
-                    removeUserFromScreen(user.email)
-                }
+        // let multiplyByThree = multiply.bind(this, 3);
+        // multiplyByThree(5);
+        
+        // another method by using clousers
+           let multiply = function (x){
+               return function (y){
+                   console.log(x * y);
+               }
+           }
 
-                const parentNode = document.getElementById('listOfUsers');
-                const childHTML = `<li id=${user.email}> ${user.name} - ${user.email}
-                                        <button onclick=deleteUser('${user.email}')> Delete User </button>
-                                        <button onclick=editUserDetails('${user.email}','${user.name}','${user.phonenumber}')>Edit User </button>
-                                     </li>`
+           let multiplyByTwo = multiply(2);
+           multiplyByTwo(3);
 
-                parentNode.innerHTML = parentNode.innerHTML + childHTML;
-            }
-
-            //Edit User
-
-            function editUserDetails(emailId, name, phonenumber){
-
-                document.getElementById('email').value = emailId;
-                document.getElementById('username').value = name;
-                document.getElementById('phonenumber').value =phonenumber;
-
-                deleteUser(emailId)
-             }
-
-            // deleteUser('abc@gmail.com')
-
-            function deleteUser(emailId){
-                console.log(emailId)
-                localStorage.removeItem(emailId);
-                removeUserFromScreen(emailId);
-
-            }
-
-            function removeUserFromScreen(emailId){
-                const parentNode = document.getElementById('listOfUsers');
-                const childNodeToBeDeleted = document.getElementById(emailId);
-                if(childNodeToBeDeleted) {
-                    parentNode.removeChild(childNodeToBeDeleted)
-                }
-            }
-
-
-
-
-
-
-
+           let multiplyByThree = multiply(3);
+           multiplyByThree(10); 
+        
+        
         </script>
 
 
