@@ -1,19 +1,67 @@
-<html>
-    <body>
-     <h1 id="heading">Namaste JavaScript </h1>
-       <button id="clickme">click me</button>
-        <script>
-        function DOMCONTENTLOADED(){
-            let count=0;
-        document.getElementById("clickme")
-        .addEventListener("click", function xyz(){
-            console.log("DOM has loaded",count++);
-        }); 
-        }
-        DOMCONTENTLOADED();
-        
-        </script>
+<!DOCTYPE html>
+<html lang="en">
+   
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Async JS</title>
+</head>
+<body>
+    <script>
+ const posts = [
+ { title: 'Post One', body: 'This is post one' ,createdAt: new Date().getTime()},
+  { title: 'Post Two', body: 'This is post Two', createdAt: new Date().getTime()}
+];
+
+  function getpost(){
+    setTimeout(() => {
+        let output = '';
+       posts.forEach((post, index) => {
+    output += `<li>${post.title}</li>`
+    });
+    document.body.innerHTML = output
+}, 1000)
+}
+
+getpost();
 
 
-    </body>
+function createPost(post) {
+   return new Promise((resolve, reject) => {
+       setTimeout(() => {
+           posts.push(post);
+           const error = false;
+
+           if (!error){
+               resolve();
+           }else{
+               reject('Error: Something went wrong');
+           }
+       }, 2000);
+   });
+}
+
+//  createPost({title:'Post Three', body: 'This is post three'})
+//  .then(getpost)
+//  .catch(err => console.log(err));
+
+ const promise1 = Promise.resolve('Hello World');
+ const promise2 = 10;
+ const promise3 = new Promise((resolve,reject) => 
+  setTimeout(resolve, 2000, 'Goodbye')
+ );
+ const promise4 = fetch
+ ('https://www.json.org/json-en.html').then(res => res.json()
+ );
+
+ promise.all([promise1, promise2, promise3, promise4])
+ .then(values =>
+ console.log(values)
+
+ );
+    
+    </script>
+</body>
 </html>
