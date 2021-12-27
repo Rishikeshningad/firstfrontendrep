@@ -1,121 +1,243 @@
-<html>
+</div><!DOCTYPE html>
+<html lang="en">
+
 <body>
-    <form  onsubmit="saveToLocalStorage(event)">
-        <label> Name</label>
-        <input id='username' type="text" name="username"  required/>
-        <label> EmailId</label>
-        <input id='email' type="email" name="emailId"  required/>
-        <label> Phone Number</label>
-        <input id='phonenumber' type="tel" name="phonenumber" />
-        <button> Submit </button>
-    </form>
-    <ul id='listOfUsers'></ul>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
-    <script>
-        function saveToLocalStorage(event) {
-            event.preventDefault();
-            const name = event.target.username.value;
-            const email = event.target.emailId.value;
-            const phonenumber = event.target.phonenumber.value;
-            // localStorage.setItem('name', name);
-            // localStorage.setItem('email', email);
-            // localStorage.setItem('phonenumber', phonenumber)
-            const obj = {
-                name,
-                email,
-                phonenumber
-            }
-            //localStorage.setItem(obj.email, JSON.stringify(obj))
-            //showNewUserOnScreen(obj)
+ 
+  <script>
+      class Node {
+  constructor(data, left = null, right = null) {
+    this.data = data;
+    this.left = left;
+    this.right = right;
+  }
+}
 
-            axios.post("https://crudcrud.com/api/3084df3d5645423d92a9624179e7b303/applicationData",obj)
-                .then((respone) =>{
-                    showNewUserOnScreen(respone.data)
-                  // console.log(respone)
-                })
-                .catch((err)=> {
-                    document.body.innerHTML = document.body.innerHTML + "<h4> something went wrong </h4>"
-                    console.log(err)
-                })
-                // localStorage.setItem(obj.email, JSON.stringify(obj))
-                showNewUserOnScreen(obj)
+class BST {
+  constructor() {
+    this.root = null;
+  }
+  add(data) {
+    const node = this.root;
+    if (node === null) {
+      this.root = new Node(data);
+      return;
+    } else {
+      const searchTree = function(node) {
+        if (data < node.data) {
+          if (node.left === null) {
+            node.left = new Node(data);
+            return;
+          } else if (node.left !== null) {
+            return searchTree(node.left);
+          }
+        } else if (data > node.data) {
+          if (node.right === null) {
+            node.right = new Node(data);
+            return;
+          } else if (node.right !== null) {
+            return searchTree(node.right);
+          }
+        } else {
+          return null;
         }
-
-        window.addEventListener("DOMContentLoaded", () => {
-        axios.get("https://crudcrud.com/api/3084df3d5645423d92a9624179e7b303/applicationData")
-               .then((response) => {
-             // console.log(response);
-
-              for (var i = 0; i < response.data.length; i++) {
-              showNewUsersOnScreen(response.data[i]);
-              }
-             })
-             .catch((err) => {
-                 console.log(err)
-             })
-        })
-
-         function showNewUserOnScreen(user){
-
-user = {
-    _id: '',
-    name: '',
-    email: '',
+      };
+      return searchTree(node);
+    }
+  }
+  findMin() {
+    let current = this.root;
+    while (current.left !== null) {
+      current = current.left;
+    }
+    return current.data;
+  }
+  findMax() {
+    let current = this.root;
+    while (current.right !== null) {
+      current = current.right;
+    }
+    return current.data;
+  }
+  find(data) {
+    let current = this.root;
+    while (current.data !== data) {
+      if (data < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+      if (current === null) {
+        return null;
+      }
+    }
+    return current;
+  }
+  isPresent(data) {
+    let current = this.root;
+    while (current) {
+      if (data === current.data) {
+        return true;
+      }
+      if (data < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+    return false;
+  }
+  remove(data) {
+    const removeNode = function(node, data) {
+      if (node == null) {
+        return null;
+      }
+      if (data == node.data) {
+        // node has no children 
+        if (node.left == null && node.right == null) {
+          return null;
+        }
+        // node has no left child 
+        if (node.left == null) {
+          return node.right;
+        }
+        // node has no right child 
+        if (node.right == null) {
+          return node.left;
+        }
+        // node has two children 
+        var tempNode = node.right;
+        while (tempNode.left !== null) {
+          tempNode = tempNode.left;
+        }
+        node.data = tempNode.data;
+        node.right = removeNode(node.right, tempNode.data);
+        return node;
+      } else if (data < node.data) {
+        node.left = removeNode(node.left, data);
+        return node;
+      } else {
+        node.right = removeNode(node.right, data);
+        return node;
+      }
+    }
+    this.root = removeNode(this.root, data);
+  }
+  isBalanced() {
+    return (this.findMinHeight() >= this.findMaxHeight() - 1)
+  }
+  findMinHeight(node = this.root) {
+      if (node == null) {
+          return -1;
+      };
+      let left = this.findMinHeight(node.left);
+      let right = this.findMinHeight(node.right);
+      if (left < right) {
+          return left + 1;
+      } else {
+          return right + 1;
+      };
+  }
+  findMaxHeight(node = this.root) {
+      if (node == null) {
+          return -1;
+      };
+      let left = this.findMaxHeight(node.left);
+      let right = this.findMaxHeight(node.right);
+      if (left > right) {
+          return left + 1;
+      } else {
+          return right + 1;
+      };
+  }
+  inOrder() {
+    if (this.root == null) {
+      return null;
+    } else {
+      var result = new Array();
+      function traverseInOrder(node) {       
+        node.left && traverseInOrder(node.left);
+        result.push(node.data);
+        node.right && traverseInOrder(node.right);
+      }
+      traverseInOrder(this.root);
+      return result;
+    };
+  }
+  preOrder() {
+    if (this.root == null) {
+      return null;
+    } else {
+      var result = new Array();
+      function traversePreOrder(node) {
+        result.push(node.data);
+        node.left && traversePreOrder(node.left);
+        node.right && traversePreOrder(node.right);
+      };
+      traversePreOrder(this.root);
+      return result;
+    };
+  }
+  postOrder() {
+    if (this.root == null) {
+      return null;
+    } else {
+      var result = new Array();
+      function traversePostOrder(node) {
+        node.left && traversePostOrder(node.left);
+        node.right && traversePostOrder(node.right);
+        result.push(node.data);
+      };
+      traversePostOrder(this.root);
+      return result;
+    }
+  }
+  
+  levelOrder() {
+      let result = [];
+      let Q = []; 
+      if (this.root != null) {
+          Q.push(this.root);
+          while(Q.length > 0) {
+              let node = Q.shift();
+              result.push(node.data);
+              if (node.left != null) {
+                  Q.push(node.left);
+              };
+              if (node.right != null) {
+                  Q.push(node.right);
+              };
+          };
+          return result;
+      } else {
+          return null;
+      };
+  };
 }
-document.getElementById('email').value = '';
-document.getElementById('username').value = '';
-document.getElementById('phonenumber').value ='';
-// console.log(localStorage.getItem(user.emailId))
-if(localStorage.getItem(user.email) !== null){
-    removeUserFromScreen(user.email)
-}
 
-const parentNode = document.getElementById('listOfUsers');
-const childHTML = `<li id=${user._id}> ${user.name} - ${user._id}
-                        <button onclick=deleteUser('${user.email}')> Delete User </button>
-                        <button onclick=editUserDetails('${user.email}','${user.name}','${user.phonenumber},${user._id}')>Edit User </button>
-                     </li>`
+const bst = new BST();
 
-parentNode.innerHTML = parentNode.innerHTML + childHTML;
-}
+bst.add(9);
+bst.add(4);
+bst.add(17);
+bst.add(3);
+bst.add(6);
+bst.add(22);
+bst.add(5);
+bst.add(7);
+bst.add(20);
 
-//Edit User
+console.log(bst.findMinHeight());
+console.log(bst.findMaxHeight());
+console.log(bst.isBalanced());
+bst.add(10);
+console.log(bst.findMinHeight());
+console.log(bst.findMaxHeight());
+console.log(bst.isBalanced());
+console.log('inOrder: ' + bst.inOrder());
+console.log('preOrder: ' + bst.preOrder());
+console.log('postOrder: ' + bst.postOrder());
 
-function editUserDetails(emailId, name, phonenumber, userId){
-
-document.getElementById('email').value = emailId;
-document.getElementById('username').value = name;
-document.getElementById('phonenumber').value =phonenumber;
-
-deleteUser(userId)
-}
-
-// deleteUser('abc@gmail.com')
-
-function deleteUser(userId){
-axios.delete(`https://crudcrud.com/api/3084df3d5645423d92a9624179e7b303/applicationData/${userId}`)
- .then((response) => {
-    removeUserFromScreen(userId)
- })
- .catch((err) => {
-     console.log(err)
- })
-
-// console.log(emailId)
-// localStorage.removeItem(emailId);
-// removeUserFromScreen(emailId);
-
-}
-
-function removeUserFromScreen(userId){
-const parentNode = document.getElementById('listOfUsers');
-const childNodeToBeDeleted = document.getElementById(userId);
-if(childNodeToBeDeleted) {
-    parentNode.removeChild(childNodeToBeDeleted)
-}
-}
+console.log('levelOrder: ' + bst.levelOrder());
 </script>
-
-
 </body>
 </html>
