@@ -1,3 +1,8 @@
-//console.log('Hello World');
-const fs = require('fs')
-fs.writeFileSync('hello.txt','Helle from Node.js');
+const fruits = ['apple','oranges','mango','lemon'];
+const copiedArray = [...fruits];
+console.log(copiedArray);
+
+const toArray = (...args) => {
+    return args;
+}
+console.log(toArray(1,2,3,4,));
