@@ -1,8 +1,8 @@
-const fruits = ['apple','oranges','mango','lemon'];
-const copiedArray = [...fruits];
-console.log(copiedArray);
+const http = require('http');
+const server = http.createServer((req,res) => {
+     console.log(req);
+     res.write('Rishikesh')
+     res.end()
+ });
 
-const toArray = (...args) => {
-    return args;
-}
-console.log(toArray(1,2,3,4,));
+ server.listen(4000);
