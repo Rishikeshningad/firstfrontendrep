@@ -1,0 +1,24 @@
+{
+  "name": "js-basics",
+  "version": "1.0.0",
+  "description": "Complete Node.js Guide",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "start-server": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rishikeshningad/firstfrontendrep.git"
+  },
+  "author": "\"rishikesh ningad\",",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rishikeshningad/firstfrontendrep/issues"
+  },
+  "homepage": "https://github.com/Rishikeshningad/firstfrontendrep#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
