@@ -1,12 +1,10 @@
 const http = require('http');
 
-const index = require('./index');
+const express = require('express');
 
-console.log(index.someText);
+const app = express();
 
-const server = http.createServer(index);
+const server = http.createServer(app);
 
 server.listen(4000);
 
-// attached file name is index.js
-// committed id is Node module system 
