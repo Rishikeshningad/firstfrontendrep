@@ -1,4 +1,14 @@
 const Product = require('../models/product');
+const User = require('../models/user');
+
+exports.getUser = (req, res, next) => {
+  res.render('user', {
+pageTitle: 'user',
+path: 'user',
+editing: false
+  });
+};
+
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
@@ -7,6 +17,8 @@ exports.getAddProduct = (req, res, next) => {
     editing: false
   });
 };
+
+
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
@@ -28,6 +40,10 @@ exports.postAddProduct = (req, res, next) => {
       console.log(err);
     });
 };
+
+
+
+
 
 exports.getEditProduct = (req, res, next) => {
   const editMode = req.query.edit;
