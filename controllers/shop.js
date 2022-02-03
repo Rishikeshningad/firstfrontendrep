@@ -1,6 +1,5 @@
 const Product = require('../models/product');
 const Cart = require('../models/cart');
-const User = require('../models/user');
 
 exports.getProducts = (req, res, next) => {
   Product.findAll()
@@ -10,33 +9,6 @@ exports.getProducts = (req, res, next) => {
         pageTitle: 'All Products',
         path: '/products'
       });
-    })
-    .catch(err => {
-      console.log(err);
-    });
-};
-
-exports.getUsers = (req, res) => {
-  User.findAll().then(users => {
-    res.send({users: users, success: true})
-  })
-}
-
-exports.postAddNewUsers = (req, res, next) => {
-  const title = req.body.title;
-  const imageUrl = req.body.imageUrl;
-  const price = req.body.price;
-  const description = req.body.description;
-  Product.create({
-    title: title,
-    price: price,
-    imageUrl: imageUrl,
-    description: description
-  })
-    .then(result => {
-       console.log(result);
-      console.log('Created User');
-      res.redirect('/admin/users');
     })
     .catch(err => {
       console.log(err);
@@ -54,7 +26,7 @@ exports.getProduct = (req, res, next) => {
   //     });
   //   })
   //   .catch(err => console.log(err));
-  Product.findByPk(prodId)
+  Product.findById(prodId)
     .then(product => {
       res.render('shop/product-detail', {
         product: product,
