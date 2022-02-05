@@ -1,18 +1,14 @@
-const btn = document.getElementById('btn');
-const container = document.getElementById('container');
+const text = "My viewers on twitch are the best!!";
 
-btn.addEventListener('click', () => {
-    createNotification();
-});
+let index = 0;
 
-function createNotification() {
-    const notif = document.createElement('div');
-    notif.classList.add('toast');
+function writeText() {
+    document.body.innerText = text.slice(0, index);
+    index++;
 
-    notif.innerText='This challenge is crazy!';
-    
-    container.appendChild(notif);
-    setTimeout(() => {
-        notif.remove();
-    },3000)
+  if (index > text.length) {
+      index - 0;
+  }
 }
+
+setInterval(writeText, 100);
