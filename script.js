@@ -1,14 +1,11 @@
-const text = "My viewers on twitch are the best!!";
+const open = document.getElementById("open");
+const close = document.getElementById("close");
+const container = document.getElementById("container");
 
-let index = 0;
+open.addEventListener("click", () => {
+    container.classList.add("active");
+});
 
-function writeText() {
-    document.body.innerText = text.slice(0, index);
-    index++;
-
-  if (index > text.length) {
-      index - 0;
-  }
-}
-
-setInterval(writeText, 100);
+close.addEventListener("click", () => {
+    container.classList.remove("active");
+});
