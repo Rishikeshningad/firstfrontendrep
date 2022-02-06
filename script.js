@@ -1,17 +1,15 @@
-const imgs = document.getElementById('imgs');
+const container = document.getElementById('container');
+const img = document.querySelector('img');
 
-const img = document.querySelectorAll('#imgs img');
+container.addEventListener('mousemove', (e) => {
+  const x = e.clientX - e.target.offsetLeft;
+  const y = e.clientY - e.target.offsetTop;
 
-let idx = 0;
+  img.style.transformOrigin = `$(x)px $(y)px`;
+  img.style.transform = "scale(2)";
+});
 
-function run(){
-      idx++;
-
-        if(idx > img.length){
-        idx = 0;
-          }
-    imgs.style.transform = `translateX(${-idx * 500}px)`;
-   
-}
-
-setInterval(run, 2000);
+container.addEventListener('mouseleave', (e) => {
+    img.style.transformOrigin = 'center center';
+    img.style.transform = "scale(1)";
+});
