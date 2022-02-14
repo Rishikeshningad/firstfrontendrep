@@ -1,23 +1,188 @@
+*{
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
 body {
-    background-color: rebeccapurple;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Poppins", sans-serif;
-    margin: 0;
-    min-height: 100vh;
-   }
-
-#container {
-    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3);
-    width: 500px;
-    height: 500px;
-    overflow: hidden;
+ height: 100vh;
+ font: 1.6rem Helvetica, Arial;
+ margin: 0;
 }
 
-img {
-    transform-origin: center center;
-    object-fit: cover;
-    width: 100%;
+.grid-container {
+    display: grid;
+    grid-template-areas: 
+    'header'
+    'main'
+    'footer';
+    grid-template-columns: 1fr;
+    grid-template-rows: 5rem 1fr 7rem;
     height: 100%;
 }
+
+header{
+    grid-area: header;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    align-items: center;
+
+}
+
+header a {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    align-items: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+header a:hover{
+    color:rebeccapurple;
+}
+
+.brand a {
+    font-size: 2rem;
+}
+
+button {
+    border-color: aqua;
+    color: black;
+    block-size: 2rem;
+    
+}
+
+footer {
+    background-color: aqua;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+footer a {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: rebeccapurple;
+}
+   
+.h11 {
+    font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    background-color: silver;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+}
+
+.h22{
+    font-family:'Times New Roman', Times, serif;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    padding:3rem ;
+}
+
+ /* products */
+.products {
+display: flex;
+flex-wrap: wrap;
+list-style-type: none;
+padding: 0;
+margin: 0;
+justify-content:space-around;
+}
+
+.products li {
+    flex: 0 1 30rem;
+    margin: 1rem;
+    margin-bottom: 0;
+    height: 42rem;
+    
+}
+
+ .album1 {
+     font-family: 'Times New Roman', Times, serif;
+     font-size: 24px;
+     text-align: center;
+ }
+
+ .album2 {
+     font-family: 'Times New Roman', Times, serif;
+     font-size: 24px;
+     text-align: center;
+ }
+
+ .cart1 {
+     font-family: 'Times New Roman', Times, serif;
+     justify-content: space-around;
+}
+
+.cart2 {
+    font-family: 'Times New Roman', Times, serif;
+    justify-content: space-around;
+}
+
+.merchs{
+    display: flex;
+flex-wrap: wrap;
+list-style-type: none;
+padding: 0;
+margin: 0;
+justify-content:space-around;
+}
+
+.merchs li {
+    flex: 0 1 30rem;
+    margin: 1rem;
+    margin-bottom: 0;
+    height: 42rem;
+}
+
+.album3 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    text-align: center;
+}
+
+.album4 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    text-align: center;  
+}
+
+.cart3 {
+    font-family: 'Times New Roman', Times, serif;
+    justify-content: space-around; 
+}
+
+.cart4 {
+    font-family: 'Times New Roman', Times, serif;
+    justify-content: space-around;  
+}
+
+.see{
+    font-family: 'Times New Roman', Times, serif;
+    padding: 2rem;
+    text-align: center;
+    justify-content: center;
+    font-size: medium;
+    }
+
+.saw{
+    color: aqua;
+    background-color: grey;
+    font: bold;
+    block-size: 1cm;
+    border-radius: 1rem;
+    border-color: none;
+}    
