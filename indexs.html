@@ -6,142 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Commerce Project</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <script src="script.js" async></script>
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-   <div class="grid-container">
-       <header>
-           <div class="brand">
+  <header>
+      <div class="nav container">
+        <a href="/#/HOME" class="logo">HOME</a>
+        <a href="/#/STORE" class="logo">STORE</a>
+        <a href="/#/ABOUT" class="logo">ABOUT</a>
+        <i class='bx bx-cart' id="cart-icon"></i>
+        <div class="cart">
+            <h2 class="cart-title">Cart</h2>
+            <div class="cart-content">
                
-                <a href="/#/HOME">HOME</a>
-                <a href="/#/STORE">STORE</a>
-                <a href="/#/ABOUT">ABOUT</a>
-              </div>
-              <div class="cart">
-                <button type="submit" >cart</button>
-              </div>
-           
-       </header>
-       <main>
-           <div class="h11">
-               <h1>The Generics</h1>
-           </div>
-           <div class="h22">
-               <h2>MUSIC</h2>
-           </div>
-
-           <div>
-               <ul class="products">
-                <li>
-                       
-                    <div class="product">
-                     <div class="album1">
-                         Album 1
-                     </div>
-                     
-                         <a href="/#/product/1">
-                            <img src="https://images.all-free-download.com/images/graphicwebp/ice_tree_514496.webp" alt="product 1">
-                        </a>
-
-                      <div class="cart1">
-                        $6
-                         <button type="submit">ADD TO CART</button>
-                    
-                          
-                      </div>  
-                    </div>
-                </li>
-                   <li>
-                       
-                       <div class="product">
-                        <div class="album2">
-                            Album 2
-                        </div>
-                        
-                            <a href="/#/product/2">
-                               <img src="https://images.all-free-download.com/images/graphicwebp/pink_edges_565018.webp" alt="product 2">
-                           </a>
-
-                         <div class="cart2">
-                            $10
-                            <button type="submit">ADD TO CART</button>
-                         </div>
-                         
-                       
-                   </li>
-                   
-               </ul>
-           </div>
-
-           <div class="h22">
-            <h2>MERCH</h2>
-          </div>
-
-          <div>
-            <ul class="merchs">
-             <li>
-                    
-                 <div class="merch">
-                  <div class="album3">
-                      T-SHIRT
-                  </div>
-                  
-                      <a href="/#/merch/1">
-                         <img src="data:image/jpeg;base64,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" alt="product 1">
-                     </a>
-
-                   <div class="cart3">
-                     $12
-                      <button type="submit">ADD TO CART</button>
-                 
-                       
-                   </div>  
-                 </div>
-             </li>
-                <li>
-                    
-                    <div class="merch">
-                     <div class="album4">
-                         COFFEE
-                     </div>
-                     
-                         <a href="/#/merch/2">
-                            <img src="https://yumnatarian.files.wordpress.com/2012/07/250px-coffee.gif" alt="product 2">
-                        </a>
-
-                      <div class="cart4">
-                         $22
-                         <button type="submit">ADD TO CART</button>
-                      </div>
-                      
-                    
-                </li>
-                
-            </ul>
-        </div>
-       
-        <div  class="see">
-            <button type="submit" class="saw">SEE THE CART</button>
-        </div>
-            
-        
-        
-
-       </main>
-       <footer>
-           <div class="footer">
-            
-                <a href="http://youtube">Youtube</a>
-                <a href="http://stopfy">Spotify</a>
-                <a href="http://facebook">Facebook</a>
             </div>
-            <div>
-                <h1>The Generics</h1>
+            <div class="total">
+                <div class="total-title">Total</div>
+                <div class="total-price">$0</div>
             </div>
-           
-       </footer>
-    </div>
-
-        
-   
+            <button type="button" class="btn-buy">Buy</button>
+            <i class='bx bx-x' id="close-cart"></i>
+        </div>
+      </div>
+  </header>
+  <section class="shop container">
+      <h2 class="section-title">Products</h2>
+      <div class="shop-content">
+          <div class="product-box">
+              <img src="https://cms.cloudinary.vpsvc.com//image/fetch/q_auto:eco,w_700,f_auto,dpr_auto/https://s3-eu-west-1.amazonaws.com/sitecore-media-bucket/prod%2Fen%2F%7B41ED0F83-1DC4-4568-B273-4DBCCE756419%7D" alt="" class="product-img">
+              <h2 class="product-title">SHIRT</h2>
+              <span class="price">$25</span>
+              <i class='bx bx-shopping-bag add-cart'></i>
+            </div>
+            <div class="product-box">
+                <img src="https://m.media-amazon.com/images/I/419DHgF1nqL.jpg" alt="" class="product-img">
+                <h2 class="product-title">CAP</h2>
+                <span class="price">$15</span>
+                <i class='bx bx-shopping-bag add-cart'></i>
+              </div>
+              <div class="product-box">
+                <img src="https://cdn.shopify.com/s/files/1/0661/7423/products/avenger-003-right-view.jpg?v=1648126317" alt="" class="product-img">
+                <h2 class="product-title">SUNGLASSES</h2>
+                <span class="price">$10</span>
+                <i class='bx bx-shopping-bag add-cart'></i>
+              </div>
+      </div>
+  </section>
 </body>
