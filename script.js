@@ -94,14 +94,15 @@ cartShopBox.getElementsByClassName('cart-quantity')[0].addEventListener('change'
 }
 // Update Total
 function updatetotal(){
-    var cartContent = document.getElementsByClassName('cart-content')[0]
-    var cartBoxes = cartContent.getElementsByClassName('cart-box')
+    var cartContent = document.getElementsByClassName('cart-content')[0];
+    var cartBoxes = cartContent.getElementsByClassName('cart-box');
+    var total = 0;
     for (var i=0; i < cartBoxes.length; i++){
         var cartBox = cartBoxes[i];
         var priceElement = cartBox.getElementsByClassName("cart-price")[0];
         var quantityElement = cartBox.getElementsByClassName("cart-quantity")[0];
         var price = parseFloat(priceElement.innerText.replace("$",""));
-        var quantity = quantityElement.value;
+        var quantity = quantityElement.value
         total = total + (price * quantity);
         // If price contain some price value
         total = Math.round(total * 100) / 100;
@@ -110,13 +111,5 @@ function updatetotal(){
     }
 }
 
-// Quantity Changes
-function quantityChanged(event){
-    var input = event.target;
-    if (isNaN(input.value) || input.value <=0){
-        input.value = 1;
-    }
-    updatetotal();
-}
 
 }
